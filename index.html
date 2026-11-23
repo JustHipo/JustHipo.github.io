@@ -125,8 +125,23 @@ section { margin-bottom:110px; }
 .proy .mas summary:focus-visible { outline:2px solid var(--turq); outline-offset:3px; border-radius:4px; }
 .galeria { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin-top:14px; }
 .galeria img { width:100%; height:auto; display:block; border-radius:10px; border:1px solid var(--borde); background:var(--fondo2); }
-.galeria img.ancha { grid-column:1 / -1; }
-.galeria:has(img.telefono) { grid-template-columns:repeat(3, minmax(0,1fr)); }
+.galeria .ampliar { display:block; padding:0; border:0; background:none; cursor:zoom-in; border-radius:10px; transition:transform .2s; }
+.galeria .ampliar:hover { transform:translateY(-2px); }
+.galeria .ampliar:hover img { border-color:rgba(94,234,212,.5); }
+.galeria .ampliar:focus-visible { outline:2px solid var(--turq); outline-offset:3px; }
+.galeria .ampliar.ancha { grid-column:1 / -1; }
+.galeria:has(.telefono) { grid-template-columns:repeat(3, minmax(0,1fr)); }
+/* Visor de imágenes */
+.visor { border:0; padding:0; margin:0; width:100vw; height:100vh; max-width:100vw; max-height:100vh; background:transparent; color:var(--texto); }
+.visor::backdrop { background:rgba(5,10,20,.92); backdrop-filter:blur(4px); }
+.visor .marco { width:100%; height:100%; overflow:auto; display:grid; place-items:center; padding:56px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+.visor figure { margin:0; display:grid; gap:10px; justify-items:center; }
+.visor img { max-width:94vw; max-height:80vh; width:auto; height:auto; border-radius:10px; cursor:zoom-in; background:var(--fondo2); }
+.visor img.real { max-width:none; max-height:none; cursor:zoom-out; }
+.visor figcaption { font-size:14px; color:var(--texto); text-align:center; max-width:72ch; }
+.visor figcaption small { display:block; color:var(--tenue); font-size:12.5px; margin-top:2px; }
+.visor .cerrar { position:fixed; top:max(14px, env(safe-area-inset-top, 0px)); right:max(14px, env(safe-area-inset-right, 0px)); width:40px; height:40px; border-radius:10px; border:1px solid var(--borde); background:var(--fondo2); color:var(--blanco); font-size:22px; line-height:1; cursor:pointer; }
+.visor .cerrar:focus-visible { outline:2px solid var(--turq); }
 .proy .vinetas { margin:14px 0 0 20px; padding:0; font-size:14.5px; }
 .proy .vinetas li { margin-top:6px; }
 .proy .vinetas li::marker { color:var(--turq); }
@@ -303,7 +318,7 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <div class="tags"><span class="tag">Python</span><span class="tag">Claude Code</span><span class="tag">Hooks</span><span class="tag">Evals A/B</span></div>
       <details class="mas">
         <summary>Ver más</summary>
-        <div class="galeria"><img class="ancha" src="proyectos/aios-resultados.svg" alt="Gráfico de resultados con y sin AIOS" loading="lazy"><img class="ancha" src="proyectos/aios-obsidian.png" alt="La capa de conocimiento en Obsidian: carpetas y un manual de herramienta" loading="lazy"></div>
+        <div class="galeria"><button type="button" class="ampliar ancha" data-src="proyectos/aios-resultados.svg" data-alt="Gráfico de resultados con y sin AIOS" aria-label="Ampliar imagen: Gráfico de resultados con y sin AIOS"><img src="proyectos/aios-resultados.svg" alt="Gráfico de resultados con y sin AIOS" loading="lazy"></button><button type="button" class="ampliar ancha" data-src="proyectos/aios-obsidian.png" data-alt="La capa de conocimiento en Obsidian: carpetas y un manual de herramienta" aria-label="Ampliar imagen: La capa de conocimiento en Obsidian: carpetas y un manual de herramienta"><img src="proyectos/aios-obsidian.png" alt="La capa de conocimiento en Obsidian: carpetas y un manual de herramienta" loading="lazy"></button><button type="button" class="ampliar " data-src="proyectos/aios-manual.png" data-alt="Un manual de herramienta por dentro: índice de síntomas y para qué sirve" aria-label="Ampliar imagen: Un manual de herramienta por dentro: índice de síntomas y para qué sirve"><img src="proyectos/aios-manual.png" alt="Un manual de herramienta por dentro: índice de síntomas y para qué sirve" loading="lazy"></button></div>
         <ul class="vinetas"><li>Un hook al iniciar cada sesión inyecta el router, la ficha del proyecto y sus reglas, resueltas por precedencia: las del repo, las del proyecto y las generales.</li><li>Guardas antes de usar herramientas: invariantes por proyecto y lectura obligatoria del manual de una herramienta la primera vez que se usa.</li><li>Cada hallazgo entra por una bandeja con su evidencia; un janitor lo audita contra la realidad y marca las reglas que conviene convertir en código.</li><li>Medición: un clasificador de correcciones con Claude Haiku calibrado a mano (recall 0,91) sobre 91 sesiones, evaluaciones A/B con correctores deterministas y tareas trampa, y 174 pruebas.</li></ul>
       </details>
       <a class="enlace" href="https://github.com/JustHipo/aios" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
@@ -315,7 +330,7 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">SwiftData</span><span class="tag">CloudKit</span><span class="tag">FoundationModels</span><span class="tag">WidgetKit</span></div>
       <details class="mas">
         <summary>Ver más</summary>
-        <div class="galeria"><img class="telefono" src="proyectos/jardin-1.png" alt="Biblioteca de plantas" loading="lazy"><img class="telefono" src="proyectos/jardin-2.png" alt="Detalle: el motor calcula el próximo riego" loading="lazy"><img class="telefono" src="proyectos/jardin-3.png" alt="Registrar cuánta agua se aplicó" loading="lazy"></div>
+        <div class="galeria"><button type="button" class="ampliar telefono" data-src="proyectos/jardin-1.png" data-alt="Biblioteca de plantas" aria-label="Ampliar imagen: Biblioteca de plantas"><img src="proyectos/jardin-1.png" alt="Biblioteca de plantas" loading="lazy"></button><button type="button" class="ampliar telefono" data-src="proyectos/jardin-2.png" data-alt="Detalle: el motor calcula el próximo riego" aria-label="Ampliar imagen: Detalle: el motor calcula el próximo riego"><img src="proyectos/jardin-2.png" alt="Detalle: el motor calcula el próximo riego" loading="lazy"></button><button type="button" class="ampliar telefono" data-src="proyectos/jardin-3.png" data-alt="Registrar cuánta agua se aplicó" aria-label="Ampliar imagen: Registrar cuánta agua se aplicó"><img src="proyectos/jardin-3.png" alt="Registrar cuánta agua se aplicó" loading="lazy"></button></div>
         <ul class="vinetas"><li>Motor de riego: evapotranspiración de referencia (Hargreaves, contrastada con Open-Meteo), coeficiente de cultivo, reserva del sustrato según el material y el volumen de la maceta, y calibración con los riegos reales.</li><li>IA en el dispositivo (FoundationModels) que explica el cálculo y lo mueve dentro de un rango acotado; si el equipo no tiene modelo, la app funciona igual.</li><li>SwiftData con CloudKit, compartido con el widget por un App Group, y un widget con botón de regar (App Intents).</li><li>Es la segunda versión: antes de reescribir la primera (myGarden) hice una auditoría técnica y de experiencia de uso contra las heurísticas de Nielsen y las guías de iOS 26.</li></ul>
       </details>
       <a class="enlace" href="https://github.com/JustHipo/jardin-ios" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
@@ -327,7 +342,7 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <div class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">MuJoCo</span><span class="tag">Lua</span></div>
       <details class="mas">
         <summary>Ver más</summary>
-        <div class="galeria"><img class="" src="proyectos/fruitfly-1.png" alt="Obra pintada por el conectoma real" loading="lazy"><img class="" src="proyectos/fruitfly-4.png" alt="La mosca 3D pintando con seis patas" loading="lazy"><img class="ancha" src="proyectos/fruitfly-3.png" alt="Comparación contra los controles de cableado" loading="lazy"></div>
+        <div class="galeria"><button type="button" class="ampliar " data-src="proyectos/fruitfly-1.png" data-alt="Obra pintada por el conectoma real" aria-label="Ampliar imagen: Obra pintada por el conectoma real"><img src="proyectos/fruitfly-1.png" alt="Obra pintada por el conectoma real" loading="lazy"></button><button type="button" class="ampliar " data-src="proyectos/fruitfly-4.png" data-alt="La mosca 3D pintando con seis patas" aria-label="Ampliar imagen: La mosca 3D pintando con seis patas"><img src="proyectos/fruitfly-4.png" alt="La mosca 3D pintando con seis patas" loading="lazy"></button><button type="button" class="ampliar ancha" data-src="proyectos/fruitfly-3.png" data-alt="Comparación contra los controles de cableado" aria-label="Ampliar imagen: Comparación contra los controles de cableado"><img src="proyectos/fruitfly-3.png" alt="Comparación contra los controles de cableado" loading="lazy"></button></div>
         <ul class="vinetas"><li>Simulador de neuronas con disparos (LIF) sobre el conectoma MaleCNS v1.0, a 0,107 veces el tiempo real en PyTorch con Apple MPS.</li><li>art-fly: la actividad del cerebro mueve una pluma y después un cuerpo 3D de seis patas en MuJoCo, con 98 % de contacto real al pintar.</li><li>music-fly: un subgrafo motor de 4.491 neuronas controla una sesión de REAPER en vivo, a 33 a 40 Hz.</li><li>Controles: con los pesos barajados la actividad explota a 17 a 22 Hz y con una red aleatoria se aplana a 3,2 Hz; el cableado real se comporta distinto, y eso se ve en la obra.</li></ul>
       </details>
       <a class="enlace" href="https://github.com/JustHipo/fruit-fly" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
@@ -339,7 +354,7 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></div>
       <details class="mas">
         <summary>Ver más</summary>
-        <div class="galeria"><img class="ancha" src="proyectos/delitos-1.png" alt="App de Streamlit: evolución mensual por familia" loading="lazy"><img class="ancha" src="proyectos/delitos-2.png" alt="Composición por familia de delito" loading="lazy"><img class="ancha" src="proyectos/delitos-3.png" alt="Celda del notebook con el heatmap por familia y mes" loading="lazy"></div>
+        <div class="galeria"><button type="button" class="ampliar ancha" data-src="proyectos/delitos-1.png" data-alt="App de Streamlit: evolución mensual por familia" aria-label="Ampliar imagen: App de Streamlit: evolución mensual por familia"><img src="proyectos/delitos-1.png" alt="App de Streamlit: evolución mensual por familia" loading="lazy"></button><button type="button" class="ampliar ancha" data-src="proyectos/delitos-2.png" data-alt="Composición por familia de delito" aria-label="Ampliar imagen: Composición por familia de delito"><img src="proyectos/delitos-2.png" alt="Composición por familia de delito" loading="lazy"></button><button type="button" class="ampliar ancha" data-src="proyectos/delitos-3.png" data-alt="Celda del notebook con el heatmap por familia y mes" aria-label="Ampliar imagen: Celda del notebook con el heatmap por familia y mes"><img src="proyectos/delitos-3.png" alt="Celda del notebook con el heatmap por familia y mes" loading="lazy"></button></div>
         <ul class="vinetas"><li>Parser para las exportaciones del CEAD, que son archivos .xls que en realidad son HTML con números en formato chileno.</li><li>Datasets mensuales y anuales en formato largo: 2.520 registros, 8 familias y 20 subtipos de delito.</li><li>Módulo de gráficos reutilizable (índice estacional, composición) y una app de Streamlit con tres páginas: contexto, análisis exploratorio y análisis de la pregunta.</li></ul>
       </details>
       <a class="enlace" href="https://github.com/JustHipo/proyecto-viz-delitos" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
@@ -351,7 +366,7 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <div class="tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Electron</span></div>
       <details class="mas">
         <summary>Ver más</summary>
-        <div class="galeria"><img class="ancha" src="proyectos/anytype-1.png" alt="Página HTML con un kanban nativo incrustado" loading="lazy"><img class="ancha" src="proyectos/anytype-2.png" alt="Bloque HTML vivo con objetos y vistas nativas" loading="lazy"></div>
+        <div class="galeria"><button type="button" class="ampliar ancha" data-src="proyectos/anytype-1.png" data-alt="Página HTML con un kanban nativo incrustado" aria-label="Ampliar imagen: Página HTML con un kanban nativo incrustado"><img src="proyectos/anytype-1.png" alt="Página HTML con un kanban nativo incrustado" loading="lazy"></button><button type="button" class="ampliar ancha" data-src="proyectos/anytype-2.png" data-alt="Bloque HTML vivo con objetos y vistas nativas" aria-label="Ampliar imagen: Bloque HTML vivo con objetos y vistas nativas"><img src="proyectos/anytype-2.png" alt="Bloque HTML vivo con objetos y vistas nativas" loading="lazy"></button></div>
         <ul class="vinetas"><li>Páginas HTML como tipo de objeto, con modo vista y modo edición, que enlazan objetos y muestran vistas nativas como un kanban; pensadas para que una IA las cree por MCP.</li><li>Bloque HTML con sanitizador propio, formato de páginas en grilla, visor de DOCX y temas Solarized.</li><li>Avisos y bandeja de cambios del equipo, agrupados para que una edición masiva no llene de avisos.</li><li>Compatibilidad: no se toca el motor en Go y todo se guarda con piezas que el Anytype oficial ya conoce. Instaladores para Mac con actualizaciones desde GitHub Releases.</li></ul>
       </details>
       <a class="enlace" href="https://github.com/JustHipo/anytype-plus-publico" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
@@ -434,9 +449,22 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
 
     <footer>Juan Francisco Domenech Rossello · Valparaíso, Chile · 2026</footer>
   </main>
+<dialog class="visor" id="visor" aria-label="Ampliar imagen"><button type="button" class="cerrar" id="visor-cerrar" aria-label="Cerrar">×</button><div class="marco" id="visor-marco"><figure><img id="visor-img" alt=""><figcaption><span id="visor-txt"></span><small>Toca la imagen para verla a tamaño real.</small></figcaption></figure></div></dialog>
 </div>
 
 <script>
+(() => {
+  const visor = document.getElementById('visor');
+  if (!visor) return;
+  const img = document.getElementById('visor-img'), txt = document.getElementById('visor-txt');
+  document.querySelectorAll('.ampliar').forEach((b) => b.addEventListener('click', () => {
+    img.src = b.dataset.src; img.alt = b.dataset.alt; txt.textContent = b.dataset.alt; img.classList.remove('real');
+    visor.showModal();
+  }));
+  img.addEventListener('click', (e) => { e.stopPropagation(); img.classList.toggle('real'); });
+  document.getElementById('visor-cerrar').addEventListener('click', () => visor.close());
+  document.getElementById('visor-marco').addEventListener('click', (e) => { if (e.target.id === 'visor-marco') visor.close(); });
+})();
 (() => {
   const CV = {"perfil":{"nombre":"Juan Francisco Domenech Rossello","titulo":"Desarrollador Backend y Arquitecto de Software","ubicacion":"Valparaíso, Chile"},"experiencia":[{"empresa":"uPlanner","cargo":"Junior Software Engineer","fechas":"ago. 2025 – actualidad"},{"empresa":"ARGOS SpA","cargo":"Arquitecto de Software y Líder Técnico","fechas":"abr. 2026 – actualidad"},{"empresa":"Clínica RedSalud Valparaíso","cargo":"Practicante de Desarrollo de Software","fechas":"dic. 2024 – mar. 2025"},{"empresa":"Universidad Técnica Federico Santa María","cargo":"Ayudante de Cátedra · Base de Datos","fechas":"mar. 2024 – jul. 2024"},{"empresa":"Clínica RedSalud Valparaíso","cargo":"Practicante de Desarrollo de Software","fechas":"ene. 2024 – mar. 2024"},{"empresa":"Independiente","cargo":"Profesor particular de programación","fechas":"ene. 2019 – may. 2022"}],"proyectos":[{"nombre":"AIOS","fechas":"oct. – nov. 2026","repo":"https://github.com/JustHipo/aios"},{"nombre":"Jardín","fechas":"mar. – sep. 2026","repo":"https://github.com/JustHipo/jardin-ios"},{"nombre":"fruit-fly","fechas":"sep. 2026","repo":"https://github.com/JustHipo/fruit-fly"},{"nombre":"Delitos en Valparaíso","fechas":"sep. – oct. 2026","repo":"https://github.com/JustHipo/proyecto-viz-delitos"},{"nombre":"Anytype Plus","fechas":"nov. 2026","repo":"https://github.com/JustHipo/anytype-plus-publico"}],"stack":{"Backend":["TypeScript","Node.js","NestJS","GraphQL","Fastify","Prisma","BullMQ","Python","Flask"],"IA":["LangChain","LangGraph","Langfuse","Agentes de IA","MCP","Claude Code"],"Datos":["PostgreSQL","MySQL","Redis","BI"],"Cloud y DevOps":["Docker","AWS (ECS)","Kubernetes","Argo CD","GitHub Actions","Grafana","Loki","Linux"],"Frontend":["Vue 3","Nuxt","CSS"],"Otros lenguajes":["Java","C / C++","Swift","Apps Script"],"Metodologías y herramientas":["Scrum","Jira","Git","Vitest"]},"formacion":[{"titulo":"Ingeniería en Informática","lugar":"Universidad Técnica Federico Santa María","fechas":"2021 – 2027"},{"titulo":"Curso de inglés en el extranjero","lugar":"EF Language Abroad","fechas":"ene. – mar. 2020"},{"titulo":"Enseñanza Media","lugar":"Colegio Dunalastair - Las Condes","fechas":"Egresado 2020"}],"idiomas":{"Español":"Nativo","Inglés":"Avanzado (C1, EF)"},"contacto":{"email":"juanfradomenech@gmail.com","linkedin":"https://www.linkedin.com/in/juan-francisco-domenech-0b024a37b/","web":"https://justhipo.github.io"}};
   const ROLES = ["Desarrollador Backend y Arquitecto de Software","TypeScript · Node.js · GraphQL","PostgreSQL · Prisma · NestJS","Ingeniería en Informática · USM"];
