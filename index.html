@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Juan Francisco Domenech Rossello · Desarrollador Backend</title>
-<meta name="description" content="Desarrollador Backend. Estudiante de Ingeniería en Informática · USM.">
-<meta property="og:title" content="Juan Francisco Domenech Rossello · Desarrollador Backend">
+<title>Juan Francisco Domenech Rossello · Desarrollador Backend y Arquitecto de Software</title>
+<meta name="description" content="Desarrollador Backend y Arquitecto de Software. Estudiante de Ingeniería en Informática · USM.">
+<meta property="og:title" content="Juan Francisco Domenech Rossello · Desarrollador Backend y Arquitecto de Software">
 <meta property="og:description" content="Estudiante de Ingeniería en Informática · USM">
 <meta property="og:image" content="https://justhipo.github.io/foto.jpg">
 <meta name="theme-color" content="#0b1324">
@@ -100,6 +100,10 @@ section { margin-bottom:110px; }
 .exp .empresa { color:var(--turq); }
 .exp .en { color:var(--tenue); }
 .exp p { font-size:15px; }
+.exp .vinetas { margin:8px 0 0 20px; padding:0; font-size:15px; }
+.exp .vinetas li { margin-top:6px; }
+.exp .vinetas li::marker { color:var(--turq); }
+.exp .vinetas b { color:var(--blanco); font-weight:600; }
 .fechas { font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--tenue); margin-bottom:4px; letter-spacing:.02em; }
 .enlace { display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:14px; font-weight:600; color:var(--turq); border-bottom:1px solid rgba(94,234,212,.35); padding-bottom:1px; transition:gap .2s, border-color .2s; }
 .enlace:hover { gap:10px; border-color:var(--turq); }
@@ -108,9 +112,28 @@ section { margin-bottom:110px; }
 .chip { font-size:13.5px; color:var(--blanco); background:rgba(255,255,255,.04); border:1px solid var(--borde); border-radius:8px; padding:4px 11px; transition:border-color .2s, color .2s, transform .2s; }
 .chip:hover { border-color:var(--turq); color:var(--turq); transform:translateY(-1px); }
 
+/* Proyectos */
+.proy h3 { font-family:Sora, sans-serif; font-size:18px; font-weight:600; color:var(--blanco); line-height:1.35; margin-bottom:8px; }
+.proy p:not(.fechas) { font-size:15px; }
+.proy { align-self:start; }
+.proy .enlace { margin-top:14px; }
+.proy .mas { margin-top:14px; border-top:1px solid var(--borde); padding-top:12px; }
+.proy .mas summary { cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--turq); }
+.proy .mas summary::-webkit-details-marker { display:none; }
+.proy .mas summary::before { content:"+"; display:inline-grid; place-items:center; width:18px; height:18px; border:1px solid rgba(94,234,212,.4); border-radius:5px; font-size:13px; line-height:1; transition:transform .2s; }
+.proy .mas[open] summary::before { content:"−"; }
+.proy .mas summary:focus-visible { outline:2px solid var(--turq); outline-offset:3px; border-radius:4px; }
+.galeria { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin-top:14px; }
+.galeria img { width:100%; height:auto; display:block; border-radius:10px; border:1px solid var(--borde); background:var(--fondo2); }
+.galeria img.ancha { grid-column:1 / -1; }
+.galeria:has(img.telefono) { grid-template-columns:repeat(3, minmax(0,1fr)); }
+.proy .vinetas { margin:14px 0 0 20px; padding:0; font-size:14.5px; }
+.proy .vinetas li { margin-top:6px; }
+.proy .vinetas li::marker { color:var(--turq); }
+
 /* Stack */
 .rejilla { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
-.bento.ancha { grid-column:1 / -1; }
+.bento.ancha, .proy.ancha { grid-column:1 / -1; }
 .bento h3 { font-family:Sora, sans-serif; font-size:14px; font-weight:600; color:var(--blanco); letter-spacing:.02em; }
 .bento .chips { margin-top:12px; }
 
@@ -173,7 +196,7 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
 <div class="capas" aria-hidden="true"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
 <div class="foco" aria-hidden="true"></div>
 
-<nav class="barra-movil" aria-label="Secciones"><a href="#sobre" data-ir="sobre">Sobre mí</a><a href="#experiencia" data-ir="experiencia">Experiencia</a><a href="#stack" data-ir="stack">Stack</a><a href="#consola" data-ir="consola">Consola</a><a href="#formacion" data-ir="formacion">Formación</a></nav>
+<nav class="barra-movil" aria-label="Secciones"><a href="#sobre" data-ir="sobre">Sobre mí</a><a href="#experiencia" data-ir="experiencia">Experiencia</a><a href="#proyectos" data-ir="proyectos">Proyectos</a><a href="#stack" data-ir="stack">Stack</a><a href="#consola" data-ir="consola">Consola</a><a href="#formacion" data-ir="formacion">Formación</a></nav>
 
 <div class="contenedor">
   <header class="lateral">
@@ -181,14 +204,14 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <nav class="idioma" aria-label="Idioma de la página"><span aria-current="true">ES</span><a href="en/" hreflang="en" lang="en">EN</a></nav>
       <div class="anillo"><img src="foto.jpg" alt="Foto de Juan Francisco Domenech Rossello"></div>
       <h1>Juan Francisco Domenech Rossello</h1>
-      <p class="rol" aria-live="polite"><span id="rol">Desarrollador Backend</span><span class="cursor"></span></p>
-      <p class="bajada">Estudiante de Ingeniería en Informática · USM. Construyo APIs, bases de datos y sistemas multi-tenant.</p>
+      <p class="rol" aria-live="polite"><span id="rol">Desarrollador Backend y Arquitecto de Software</span><span class="cursor"></span></p>
+      <p class="bajada">Estudiante de Ingeniería en Informática · USM</p>
       <div class="acciones">
         <a class="boton primario" href="CV_Juan_Francisco_Domenech_Rossello.pdf" download><svg viewBox="0 0 24 24"><path d="M11 3h2v9.6l3.3-3.3 1.4 1.4L12 16.4l-5.7-5.7 1.4-1.4 3.3 3.3zM4 18h16v2H4z"/></svg>Descargar CV</a>
         <a class="boton" href="mailto:juanfradomenech@gmail.com"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4 7.3V17h16V7.3z"/></svg>Escríbeme</a>
         <a class="boton" href="https://argosspa.cl/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-3a15 15 0 0 0-1.3-3.9A8 8 0 0 1 18.9 8zM12 4.1A13 13 0 0 1 13.8 8h-3.6A13 13 0 0 1 12 4.1zM4.3 14a8 8 0 0 1 0-4h3.4a16 16 0 0 0 0 4zm.8 2h3a15 15 0 0 0 1.3 3.9A8 8 0 0 1 5.1 16zm3-8h-3a8 8 0 0 1 4.3-3.9A15 15 0 0 0 8.1 8zM12 19.9a13 13 0 0 1-1.8-3.9h3.6a13 13 0 0 1-1.8 3.9zM14.3 14H9.7a14 14 0 0 1 0-4h4.6a14 14 0 0 1 0 4zm.3 5.9a15 15 0 0 0 1.3-3.9h3a8 8 0 0 1-4.3 3.9zm1.7-5.9a16 16 0 0 0 0-4h3.4a8 8 0 0 1 0 4z"/></svg>Proyecto ARGOS</a>
       </div>
-      <nav class="indice" aria-label="Secciones"><a href="#sobre" data-ir="sobre">Sobre mí</a><a href="#experiencia" data-ir="experiencia">Experiencia</a><a href="#stack" data-ir="stack">Stack</a><a href="#consola" data-ir="consola">Consola</a><a href="#formacion" data-ir="formacion">Formación</a></nav>
+      <nav class="indice" aria-label="Secciones"><a href="#sobre" data-ir="sobre">Sobre mí</a><a href="#experiencia" data-ir="experiencia">Experiencia</a><a href="#proyectos" data-ir="proyectos">Proyectos</a><a href="#stack" data-ir="stack">Stack</a><a href="#consola" data-ir="consola">Consola</a><a href="#formacion" data-ir="formacion">Formación</a></nav>
     </div>
     <div class="redes">
       <a href="https://www.linkedin.com/in/juan-francisco-domenech-0b024a37b/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm2.5 6.5V18h2.7V9.5zm1.35-4.2a1.55 1.55 0 1 0 0 3.1 1.55 1.55 0 0 0 0-3.1zM11 9.5V18h2.7v-4.4c0-1.2.4-2 1.5-2s1.4.9 1.4 2V18h2.7v-5c0-2.5-1.3-3.7-3.2-3.7a2.8 2.8 0 0 0-2.5 1.3V9.5z"/></svg>LinkedIn</a>
@@ -200,8 +223,8 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
   <main>
     <section id="sobre" class="sobre">
       <p class="etiqueta">01 <span>/ sobre mí</span></p>
-      <p class="revelar">Estudiante de Ingeniería en Informática en la Universidad Técnica Federico Santa María y desarrollador backend. Trabajo en <b>uPlanner</b> en una plataforma web que usan varias instituciones educacionales, y desarrollé el backend de <b>ARGOS</b>, una plataforma de patrullaje preventivo para la Municipalidad de Santo Domingo. Realicé mis prácticas profesional e industrial en la Clínica RedSalud de Valparaíso. Trabajo principalmente con <b>TypeScript</b>, <b>Node.js</b>, <b>GraphQL</b> y <b>PostgreSQL</b>, y también con <b>Python</b>. Tengo inglés nivel <b>C1</b>, certificado por EF.</p>
-      <p class="revelar" style="margin-top:18px;--retraso:80ms">Disfruto resolver problemas lógicos y entender bien qué está pasando antes de escribir código. Fuera del trabajo sigo construyendo: armé mi propio sistema para que mis asistentes de IA compartan contexto entre proyectos y hago apps iOS para uso personal. Aprendo mejor haciendo, y casi todo lo que sé de una tecnología nueva lo aprendí construyendo algo con ella.</p>
+      <p class="revelar">Desarrollador de software con foco en backend y arquitectura. Trabajo en <b>uPlanner</b> en una plataforma web multi-tenant que usan varias instituciones educacionales, y soy arquitecto de software y líder técnico de <b>ARGOS</b>, una plataforma para la gestión de seguridad municipal que ganó la Feria de Software 2026. Realicé mis prácticas profesional e industrial en la Clínica RedSalud de Valparaíso. Trabajo principalmente con <b>TypeScript</b>, <b>Node.js</b>, <b>GraphQL</b> y <b>PostgreSQL</b>, y también con <b>Python</b>. Tengo inglés nivel <b>C1</b>, certificado por EF.</p>
+      <p class="revelar" style="margin-top:18px;--retraso:80ms">Me gusta entender bien el problema antes de escribir código y ver cómo funciona un sistema de punta a punta. Fuera del trabajo sigo construyendo: tengo proyectos personales de aplicaciones y de herramientas con IA, y casi todo lo que sé de una tecnología nueva lo aprendí usándola en algo real.</p>
     </section>
 
     <section id="experiencia">
@@ -221,8 +244,8 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <span class="punto" aria-hidden="true"></span>
       <div class="tarjeta">
         <p class="fechas">abr. 2026 – actualidad</p>
-        <h3>Backend Developer &amp; Software Architect <span class="en">·</span> <span class="empresa">ARGOS S.P.A.</span></h3>
-        <p>Desarrollador backend y arquitecto del proyecto ARGOS, una plataforma para digitalizar las bitácoras y el patrullaje preventivo de la Municipalidad de Santo Domingo, que hoy los lleva en papel y planillas Excel. Diseñé por mi cuenta la arquitectura y el stack tecnológico: una API en NestJS, GraphQL y PostgreSQL con arquitectura multi-tenant de una base de datos por municipio. Desarrollé el optimizador de turnos y los módulos de incidentes, flota con GPS, mapa de calor e indicadores, y me encargué del despliegue con Docker y del monitoreo con Grafana. Además lideré la gestión del proyecto en Jira: definí y asigné las tareas del equipo de frontend y móvil, revisé su código y trabajé directamente con el cliente usando Scrum.</p>
+        <h3>Arquitecto de Software y Líder Técnico <span class="en">·</span> <span class="empresa">ARGOS SpA</span></h3>
+        <p>Arquitecto de software y líder técnico de ARGOS, una plataforma para que los municipios digitalicen su patrullaje preventivo, sus bitácoras y la gestión de incidentes, que hoy llevan en papel y planillas. El cliente piloto es la Municipalidad de Santo Domingo, y el proyecto ganó la Feria de Software 2026.</p><ul class="vinetas"><li><b>Arquitectura:</b> definí la arquitectura y el stack del sistema completo (API, consola web, aplicación móvil y servicios de apoyo), preparado para atender a varios municipios con sus datos aislados.</li><li><b>Backend:</b> diseñé e implementé la API principal y los módulos de incidentes, turnos, flota, mapas e indicadores, además de un servicio de optimización de turnos.</li><li><b>Infraestructura y calidad:</b> despliegue con contenedores, monitoreo y registros centralizados, integración continua y pruebas automatizadas.</li><li><b>Liderazgo:</b> definí y asigné el trabajo del equipo de frontend y móvil, revisé su código y trabajé directamente con el cliente levantando requisitos y presentando avances.</li></ul>
         <div class="tags"><span class="tag">TypeScript</span><span class="tag">NestJS</span><span class="tag">GraphQL</span><span class="tag">PostgreSQL</span><span class="tag">PostGIS</span><span class="tag">Prisma</span><span class="tag">Python</span><span class="tag">OR-Tools</span><span class="tag">Docker</span><span class="tag">Grafana</span><span class="tag">Jira</span></div>
         <a class="enlace" href="https://argosspa.cl/" target="_blank" rel="noopener">Ver el sitio de ARGOS <span aria-hidden="true">↗</span></a>
       </div>
@@ -231,8 +254,8 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <span class="punto" aria-hidden="true"></span>
       <div class="tarjeta">
         <p class="fechas">dic. 2024 – mar. 2025</p>
-        <h3>Software Engineer Intern <span class="en">·</span> <span class="empresa">RedSalud CCHC · Clínica RedSalud Valparaíso</span></h3>
-        <p>Práctica profesional con enfoque en desarrollo de aplicaciones web con Google Apps, manejo de bases de datos y BI. Desarrollo de una plataforma para automatizar la generación de reportes y el análisis de bases de datos, con Python, NestJS y Flask, y de plataformas de digitalización de formularios médicos.</p>
+        <h3>Practicante de Desarrollo de Software <span class="en">·</span> <span class="empresa">Clínica RedSalud Valparaíso</span></h3>
+        <p>Práctica profesional enfocada en desarrollo de aplicaciones, bases de datos y BI.</p><ul class="vinetas"><li>Desarrollé una plataforma para automatizar la generación de reportes y el análisis de bases de datos, con Python, Flask y NestJS.</li><li>Desarrollé aplicaciones para digitalizar formularios médicos con Google Apps y Apps Script.</li><li>Apoyé el manejo de bases de datos y la preparación de indicadores de BI.</li></ul>
         <div class="tags"><span class="tag">Python</span><span class="tag">NestJS</span><span class="tag">Flask</span><span class="tag">Google Apps</span><span class="tag">SQL</span><span class="tag">BI</span></div>
         
       </div>
@@ -241,8 +264,8 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <span class="punto" aria-hidden="true"></span>
       <div class="tarjeta">
         <p class="fechas">mar. 2024 – jul. 2024</p>
-        <h3>Teacher Assistant · Base de Datos <span class="en">·</span> <span class="empresa">Universidad Técnica Federico Santa María</span></h3>
-        <p>Ayudante de cátedra y corrección de evaluaciones de la asignatura Base de Datos.</p>
+        <h3>Ayudante de Cátedra · Base de Datos <span class="en">·</span> <span class="empresa">Universidad Técnica Federico Santa María</span></h3>
+        <p>Ayudante de cátedra de la asignatura Base de Datos (modelo relacional y SQL). Hice clases presenciales de ayudantía y corregí evaluaciones.</p>
         
         
       </div>
@@ -251,8 +274,8 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <span class="punto" aria-hidden="true"></span>
       <div class="tarjeta">
         <p class="fechas">ene. 2024 – mar. 2024</p>
-        <h3>Software Engineer Intern <span class="en">·</span> <span class="empresa">RedSalud CCHC · Clínica RedSalud Valparaíso</span></h3>
-        <p>Práctica industrial. Desarrollo de software, manejo de bases de datos y actividades generales para crear herramientas para la clínica.</p>
+        <h3>Practicante de Desarrollo de Software <span class="en">·</span> <span class="empresa">Clínica RedSalud Valparaíso</span></h3>
+        <p>Práctica industrial. Desarrollé herramientas internas para la clínica y trabajé en el manejo de sus bases de datos.</p>
         
         
       </div>
@@ -262,15 +285,81 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
       <div class="tarjeta">
         <p class="fechas">ene. 2019 – may. 2022</p>
         <h3>Profesor particular de programación <span class="en">·</span> <span class="empresa">Independiente</span></h3>
-        <p>Clases particulares de programación en Python para estudiantes de colegio y universitarios.</p>
+        <p>Clases particulares de programación en Python para estudiantes de colegio y universitarios: fundamentos, resolución de problemas y preparación de evaluaciones.</p>
         
         
       </div>
     </article></div>
     </section>
 
+    <section id="proyectos">
+      <p class="etiqueta">03 <span>/ proyectos</span></p>
+      <p class="revelar" style="margin-bottom:18px;color:var(--tenue)">Proyectos personales y de la universidad, con su código en GitHub. Abre cada uno para ver imágenes y más detalle.</p>
+      <div class="rejilla">
+    <article class="proy tarjeta revelar ancha" style="--retraso:0ms">
+      <p class="fechas">Personal · IA · oct. – nov. 2026</p>
+      <h3>AIOS</h3>
+      <p>Capa de conocimiento compartida para mis agentes de IA de programación (Claude Code y Codex): hooks que inyectan las reglas y lecciones de cada proyecto, guardas sobre las herramientas y un janitor que audita la base. La medí con evaluaciones A/B pre-registradas y correctores deterministas: los errores repetidos bajaron 42 % (p = 0,031).</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Claude Code</span><span class="tag">Hooks</span><span class="tag">Evals A/B</span></div>
+      <details class="mas">
+        <summary>Ver más</summary>
+        <div class="galeria"><img class="ancha" src="proyectos/aios-resultados.svg" alt="Gráfico de resultados con y sin AIOS" loading="lazy"><img class="ancha" src="proyectos/aios-obsidian.png" alt="La capa de conocimiento en Obsidian: carpetas y un manual de herramienta" loading="lazy"></div>
+        <ul class="vinetas"><li>Un hook al iniciar cada sesión inyecta el router, la ficha del proyecto y sus reglas, resueltas por precedencia: las del repo, las del proyecto y las generales.</li><li>Guardas antes de usar herramientas: invariantes por proyecto y lectura obligatoria del manual de una herramienta la primera vez que se usa.</li><li>Cada hallazgo entra por una bandeja con su evidencia; un janitor lo audita contra la realidad y marca las reglas que conviene convertir en código.</li><li>Medición: un clasificador de correcciones con Claude Haiku calibrado a mano (recall 0,91) sobre 91 sesiones, evaluaciones A/B con correctores deterministas y tareas trampa, y 174 pruebas.</li></ul>
+      </details>
+      <a class="enlace" href="https://github.com/JustHipo/aios" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
+    </article>
+    <article class="proy tarjeta revelar " style="--retraso:60ms">
+      <p class="fechas">Personal · iOS · mar. – sep. 2026</p>
+      <h3>Jardín</h3>
+      <p>App iOS de cuidado de plantas con un motor de riego propio basado en evapotranspiración y en la geometría de la maceta, que se calibra con los riegos reales. Usa IA en el dispositivo solo para explicar y ajustar dentro de límites, y tiene un widget para regar sin abrir la app.</p>
+      <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">SwiftData</span><span class="tag">CloudKit</span><span class="tag">FoundationModels</span><span class="tag">WidgetKit</span></div>
+      <details class="mas">
+        <summary>Ver más</summary>
+        <div class="galeria"><img class="telefono" src="proyectos/jardin-1.png" alt="Biblioteca de plantas" loading="lazy"><img class="telefono" src="proyectos/jardin-2.png" alt="Detalle: el motor calcula el próximo riego" loading="lazy"><img class="telefono" src="proyectos/jardin-3.png" alt="Registrar cuánta agua se aplicó" loading="lazy"></div>
+        <ul class="vinetas"><li>Motor de riego: evapotranspiración de referencia (Hargreaves, contrastada con Open-Meteo), coeficiente de cultivo, reserva del sustrato según el material y el volumen de la maceta, y calibración con los riegos reales.</li><li>IA en el dispositivo (FoundationModels) que explica el cálculo y lo mueve dentro de un rango acotado; si el equipo no tiene modelo, la app funciona igual.</li><li>SwiftData con CloudKit, compartido con el widget por un App Group, y un widget con botón de regar (App Intents).</li><li>Es la segunda versión: antes de reescribir la primera (myGarden) hice una auditoría técnica y de experiencia de uso contra las heurísticas de Nielsen y las guías de iOS 26.</li></ul>
+      </details>
+      <a class="enlace" href="https://github.com/JustHipo/jardin-ios" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
+    </article>
+    <article class="proy tarjeta revelar " style="--retraso:120ms">
+      <p class="fechas">Personal · Investigación · sep. 2026</p>
+      <h3>fruit-fly</h3>
+      <p>Simulación del conectoma completo de la mosca de la fruta (161 mil neuronas y 14 millones de sinapsis) cuya actividad mueve un cuerpo físico que pinta y una sesión de REAPER que toca música. Cada resultado se valida contra redes con el cableado barajado o aleatorio.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">MuJoCo</span><span class="tag">Lua</span></div>
+      <details class="mas">
+        <summary>Ver más</summary>
+        <div class="galeria"><img class="" src="proyectos/fruitfly-1.png" alt="Obra pintada por el conectoma real" loading="lazy"><img class="" src="proyectos/fruitfly-4.png" alt="La mosca 3D pintando con seis patas" loading="lazy"><img class="ancha" src="proyectos/fruitfly-3.png" alt="Comparación contra los controles de cableado" loading="lazy"></div>
+        <ul class="vinetas"><li>Simulador de neuronas con disparos (LIF) sobre el conectoma MaleCNS v1.0, a 0,107 veces el tiempo real en PyTorch con Apple MPS.</li><li>art-fly: la actividad del cerebro mueve una pluma y después un cuerpo 3D de seis patas en MuJoCo, con 98 % de contacto real al pintar.</li><li>music-fly: un subgrafo motor de 4.491 neuronas controla una sesión de REAPER en vivo, a 33 a 40 Hz.</li><li>Controles: con los pesos barajados la actividad explota a 17 a 22 Hz y con una red aleatoria se aplana a 3,2 Hz; el cableado real se comporta distinto, y eso se ve en la obra.</li></ul>
+      </details>
+      <a class="enlace" href="https://github.com/JustHipo/fruit-fly" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
+    </article>
+    <article class="proy tarjeta revelar " style="--retraso:180ms">
+      <p class="fechas">Universidad · Visualización · sep. – oct. 2026</p>
+      <h3>Delitos en Valparaíso</h3>
+      <p>Análisis y app en Streamlit sobre la composición y la estacionalidad del delito en la Región de Valparaíso (CEAD, 2019 a 2026), con un parser propio para los datos oficiales. Trabajo en dupla.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></div>
+      <details class="mas">
+        <summary>Ver más</summary>
+        <div class="galeria"><img class="ancha" src="proyectos/delitos-1.png" alt="App de Streamlit: evolución mensual por familia" loading="lazy"><img class="ancha" src="proyectos/delitos-2.png" alt="Composición por familia de delito" loading="lazy"><img class="ancha" src="proyectos/delitos-3.png" alt="Celda del notebook con el heatmap por familia y mes" loading="lazy"></div>
+        <ul class="vinetas"><li>Parser para las exportaciones del CEAD, que son archivos .xls que en realidad son HTML con números en formato chileno.</li><li>Datasets mensuales y anuales en formato largo: 2.520 registros, 8 familias y 20 subtipos de delito.</li><li>Módulo de gráficos reutilizable (índice estacional, composición) y una app de Streamlit con tres páginas: contexto, análisis exploratorio y análisis de la pregunta.</li></ul>
+      </details>
+      <a class="enlace" href="https://github.com/JustHipo/proyecto-viz-delitos" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
+    </article>
+    <article class="proy tarjeta revelar " style="--retraso:240ms">
+      <p class="fechas">Personal · Open source · nov. 2026</p>
+      <h3>Anytype Plus</h3>
+      <p>Fork del cliente de escritorio de Anytype con páginas y bloques HTML que muestran vistas nativas, formato de páginas, temas y avisos de cambios para equipos, sin dejar la red oficial: los cambios al código original son mínimos y van marcados.</p>
+      <div class="tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Electron</span></div>
+      <details class="mas">
+        <summary>Ver más</summary>
+        <div class="galeria"><img class="ancha" src="proyectos/anytype-1.png" alt="Página HTML con un kanban nativo incrustado" loading="lazy"><img class="ancha" src="proyectos/anytype-2.png" alt="Bloque HTML vivo con objetos y vistas nativas" loading="lazy"></div>
+        <ul class="vinetas"><li>Páginas HTML como tipo de objeto, con modo vista y modo edición, que enlazan objetos y muestran vistas nativas como un kanban; pensadas para que una IA las cree por MCP.</li><li>Bloque HTML con sanitizador propio, formato de páginas en grilla, visor de DOCX y temas Solarized.</li><li>Avisos y bandeja de cambios del equipo, agrupados para que una edición masiva no llene de avisos.</li><li>Compatibilidad: no se toca el motor en Go y todo se guarda con piezas que el Anytype oficial ya conoce. Instaladores para Mac con actualizaciones desde GitHub Releases.</li></ul>
+      </details>
+      <a class="enlace" href="https://github.com/JustHipo/anytype-plus-publico" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span></a>
+    </article></div>
+    </section>
+
     <section id="stack">
-      <p class="etiqueta">03 <span>/ stack</span></p>
+      <p class="etiqueta">04 <span>/ stack</span></p>
       <div class="rejilla">
     <div class="bento tarjeta revelar ancha" style="--retraso:0ms">
       <h3>Backend</h3>
@@ -282,7 +371,7 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
     </div>
     <div class="bento tarjeta revelar " style="--retraso:100ms">
       <h3>Datos</h3>
-      <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">PostGIS</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">OR-Tools</span><span class="chip">BI</span></div>
+      <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">BI</span></div>
     </div>
     <div class="bento tarjeta revelar " style="--retraso:150ms">
       <h3>Cloud y DevOps</h3>
@@ -303,18 +392,18 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
     </section>
 
     <section id="consola">
-      <p class="etiqueta">04 <span>/ consola</span></p>
+      <p class="etiqueta">05 <span>/ consola</span></p>
       <p class="revelar" style="margin-bottom:18px;color:var(--tenue)">Consulta mi CV como si fuera una API: elige un comando o escribe <code style="color:var(--turq)">help</code>.</p>
       <div class="terminal revelar">
         <div class="barra"><i></i><i></i><i></i><span>juan@cv ~ curl api/cv</span></div>
-        <div class="comandos"><button type="button" data-cmd="perfil">perfil</button><button type="button" data-cmd="experiencia">experiencia</button><button type="button" data-cmd="stack">stack</button><button type="button" data-cmd="formacion">formacion</button><button type="button" data-cmd="idiomas">idiomas</button><button type="button" data-cmd="contacto">contacto</button></div>
+        <div class="comandos"><button type="button" data-cmd="perfil">perfil</button><button type="button" data-cmd="experiencia">experiencia</button><button type="button" data-cmd="proyectos">proyectos</button><button type="button" data-cmd="stack">stack</button><button type="button" data-cmd="formacion">formacion</button><button type="button" data-cmd="idiomas">idiomas</button><button type="button" data-cmd="contacto">contacto</button></div>
         <div class="salida" id="salida" role="log" aria-live="polite"></div>
         <form class="entrada" id="entrada" autocomplete="off"><label for="cmd">$</label><input id="cmd" placeholder="escribe un comando… (help)" spellcheck="false"></form>
       </div>
     </section>
 
     <section id="formacion">
-      <p class="etiqueta">05 <span>/ formación e idiomas</span></p>
+      <p class="etiqueta">06 <span>/ formación e idiomas</span></p>
       <div class="dos">
     <div class="tarjeta form revelar" style="--retraso:0ms">
       <p class="fechas">2021 – 2027</p>
@@ -323,13 +412,13 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
     </div>
     <div class="tarjeta form revelar" style="--retraso:60ms">
       <p class="fechas">ene. – mar. 2020</p>
-      <h3>Curso de inglés</h3>
+      <h3>Curso de inglés en el extranjero</h3>
       <p class="lugar">EF Language Abroad</p>
     </div>
     <div class="tarjeta form revelar" style="--retraso:120ms">
-      <p class="fechas">2020</p>
+      <p class="fechas">Egresado 2020</p>
       <h3>Enseñanza Media</h3>
-      <p class="lugar">Colegio Dunalastair</p>
+      <p class="lugar">Colegio Dunalastair - Las Condes</p>
     </div>
     <div class="tarjeta form revelar">
       <p class="fechas">Idioma</p>
@@ -349,8 +438,8 @@ footer { color:var(--tenue); font-size:13.5px; padding-top:28px; border-top:1px 
 
 <script>
 (() => {
-  const CV = {"perfil":{"nombre":"Juan Francisco Domenech Rossello","titulo":"Desarrollador Backend","ubicacion":"Valparaíso, Chile"},"experiencia":[{"empresa":"uPlanner","cargo":"Junior Software Engineer","fechas":"ago. 2025 – actualidad"},{"empresa":"ARGOS S.P.A.","cargo":"Backend Developer & Software Architect","fechas":"abr. 2026 – actualidad"},{"empresa":"RedSalud CCHC · Clínica RedSalud Valparaíso","cargo":"Software Engineer Intern","fechas":"dic. 2024 – mar. 2025"},{"empresa":"Universidad Técnica Federico Santa María","cargo":"Teacher Assistant · Base de Datos","fechas":"mar. 2024 – jul. 2024"},{"empresa":"RedSalud CCHC · Clínica RedSalud Valparaíso","cargo":"Software Engineer Intern","fechas":"ene. 2024 – mar. 2024"},{"empresa":"Independiente","cargo":"Profesor particular de programación","fechas":"ene. 2019 – may. 2022"}],"stack":{"Backend":["TypeScript","Node.js","NestJS","GraphQL","Fastify","Prisma","BullMQ","Python","Flask"],"IA":["LangChain","LangGraph","Langfuse","Agentes de IA","MCP","Claude Code"],"Datos":["PostgreSQL","PostGIS","MySQL","Redis","OR-Tools","BI"],"Cloud y DevOps":["Docker","AWS (ECS)","Kubernetes","Argo CD","GitHub Actions","Grafana","Loki","Linux"],"Frontend":["Vue 3","Nuxt","CSS"],"Otros lenguajes":["Java","C / C++","Swift","Apps Script"],"Metodologías y herramientas":["Scrum","Jira","Git","Vitest"]},"formacion":[{"titulo":"Ingeniería en Informática","lugar":"Universidad Técnica Federico Santa María","fechas":"2021 – 2027"},{"titulo":"Curso de inglés","lugar":"EF Language Abroad","fechas":"ene. – mar. 2020"},{"titulo":"Enseñanza Media","lugar":"Colegio Dunalastair","fechas":"2020"}],"idiomas":{"Español":"Nativo","Inglés":"Avanzado (C1, EF)"},"contacto":{"email":"juanfradomenech@gmail.com","linkedin":"https://www.linkedin.com/in/juan-francisco-domenech-0b024a37b/","web":"https://justhipo.github.io"}};
-  const ROLES = ["Desarrollador Backend","TypeScript · Node.js · GraphQL","PostgreSQL · Prisma · NestJS","Ingeniería en Informática · USM"];
+  const CV = {"perfil":{"nombre":"Juan Francisco Domenech Rossello","titulo":"Desarrollador Backend y Arquitecto de Software","ubicacion":"Valparaíso, Chile"},"experiencia":[{"empresa":"uPlanner","cargo":"Junior Software Engineer","fechas":"ago. 2025 – actualidad"},{"empresa":"ARGOS SpA","cargo":"Arquitecto de Software y Líder Técnico","fechas":"abr. 2026 – actualidad"},{"empresa":"Clínica RedSalud Valparaíso","cargo":"Practicante de Desarrollo de Software","fechas":"dic. 2024 – mar. 2025"},{"empresa":"Universidad Técnica Federico Santa María","cargo":"Ayudante de Cátedra · Base de Datos","fechas":"mar. 2024 – jul. 2024"},{"empresa":"Clínica RedSalud Valparaíso","cargo":"Practicante de Desarrollo de Software","fechas":"ene. 2024 – mar. 2024"},{"empresa":"Independiente","cargo":"Profesor particular de programación","fechas":"ene. 2019 – may. 2022"}],"proyectos":[{"nombre":"AIOS","fechas":"oct. – nov. 2026","repo":"https://github.com/JustHipo/aios"},{"nombre":"Jardín","fechas":"mar. – sep. 2026","repo":"https://github.com/JustHipo/jardin-ios"},{"nombre":"fruit-fly","fechas":"sep. 2026","repo":"https://github.com/JustHipo/fruit-fly"},{"nombre":"Delitos en Valparaíso","fechas":"sep. – oct. 2026","repo":"https://github.com/JustHipo/proyecto-viz-delitos"},{"nombre":"Anytype Plus","fechas":"nov. 2026","repo":"https://github.com/JustHipo/anytype-plus-publico"}],"stack":{"Backend":["TypeScript","Node.js","NestJS","GraphQL","Fastify","Prisma","BullMQ","Python","Flask"],"IA":["LangChain","LangGraph","Langfuse","Agentes de IA","MCP","Claude Code"],"Datos":["PostgreSQL","MySQL","Redis","BI"],"Cloud y DevOps":["Docker","AWS (ECS)","Kubernetes","Argo CD","GitHub Actions","Grafana","Loki","Linux"],"Frontend":["Vue 3","Nuxt","CSS"],"Otros lenguajes":["Java","C / C++","Swift","Apps Script"],"Metodologías y herramientas":["Scrum","Jira","Git","Vitest"]},"formacion":[{"titulo":"Ingeniería en Informática","lugar":"Universidad Técnica Federico Santa María","fechas":"2021 – 2027"},{"titulo":"Curso de inglés en el extranjero","lugar":"EF Language Abroad","fechas":"ene. – mar. 2020"},{"titulo":"Enseñanza Media","lugar":"Colegio Dunalastair - Las Condes","fechas":"Egresado 2020"}],"idiomas":{"Español":"Nativo","Inglés":"Avanzado (C1, EF)"},"contacto":{"email":"juanfradomenech@gmail.com","linkedin":"https://www.linkedin.com/in/juan-francisco-domenech-0b024a37b/","web":"https://justhipo.github.io"}};
+  const ROLES = ["Desarrollador Backend y Arquitecto de Software","TypeScript · Node.js · GraphQL","PostgreSQL · Prisma · NestJS","Ingeniería en Informática · USM"];
   const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Halo que sigue al cursor y brillo dentro de cada tarjeta
