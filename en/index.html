@@ -12,6 +12,7 @@
 <link rel="alternate" hreflang="es" href="https://justhipo.github.io/">
 <link rel="alternate" hreflang="en" href="https://justhipo.github.io/en/">
 <link rel="alternate" hreflang="x-default" href="https://justhipo.github.io/">
+<script data-goatcounter="https://justhipo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="../foto.jpg?v=27a46dd7">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Courier+Prime:wght@400;700&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Instrument+Sans:wdth,wght@75..100,400..700&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -231,6 +232,8 @@ section#sobre { margin-top:0; }
 .pie { margin-top:90px; padding:26px 0 40px; border-top:2.5px solid var(--linea); display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
 .pie nav { display:flex; flex-wrap:wrap; gap:20px; }
 .pie a:hover { text-decoration:underline; }
+.visitas svg { width:1.35em; height:1.35em; fill:currentColor; vertical-align:-.32em; margin-right:.35em; }
+.visitas b { font-weight:inherit; }
 
 /* Visor */
 .visor { border:0; padding:0; margin:0; width:100vw; height:100vh; max-width:100vw; max-height:100vh; background:transparent; }
@@ -643,7 +646,7 @@ section#sobre { margin-top:0; }
     </section>
     <footer class="pie">
       <nav><a href="#sobre">Home</a><a href="#experiencia">Experience</a><a href="#proyectos">Projects</a><a href="#stack">Stack</a><a href="#consola">Console</a><a href="#formacion">Education</a><a href="#contacto">Contact</a></nav>
-      <span>Juan Francisco Domenech Rossello · Valparaíso, Chile · 2026</span>
+      <span>Juan Francisco Domenech Rossello · Valparaíso, Chile · 2026<span class="visitas" id="visitas" hidden> · <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5c5 0 9 4.2 10.5 7-1.5 2.8-5.5 7-10.5 7S3 14.8 1.5 12C3 9.2 7 5 12 5zm0 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 2.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6z"/></svg><b id="visitas-n"></b> visits</span></span>
     </footer>
   </main>
 </div>
@@ -665,6 +668,14 @@ section#sobre { margin-top:0; }
   // ---------- Panel de estilo ----------
   const raiz = document.documentElement;
   const PUBLICO = true;
+  // ---------- Contador de visitas (GoatCounter; la respuesta viene con hasta 4 h de caché) ----------
+  if (PUBLICO) fetch('https://justhipo.goatcounter.com/counter/TOTAL.json')
+    .then((r) => (r.ok ? r.json() : null))
+    .then((j) => {
+      const n = j ? parseInt(String(j.count).replace(/D/g, ''), 10) : 0;
+      if (n >= 50) { document.getElementById('visitas-n').textContent = n.toLocaleString('en'); document.getElementById('visitas').hidden = false; }
+    })
+    .catch(() => {});
   const panel = document.getElementById('panel');
   const abrir = document.getElementById('panel-abrir');
   if (abrir) abrir.addEventListener('click', () => { const a = panel.classList.toggle('abierto'); abrir.setAttribute('aria-expanded', a); });
