@@ -672,8 +672,9 @@ section#sobre { margin-top:0; }
   if (PUBLICO) fetch('https://justhipo.goatcounter.com/counter/TOTAL.json')
     .then((r) => (r.ok ? r.json() : null))
     .then((j) => {
-      const n = j ? parseInt(String(j.count).replace(/D/g, ''), 10) : 0;
-      if (n >= 50) { document.getElementById('visitas-n').textContent = n.toLocaleString('en'); document.getElementById('visitas').hidden = false; }
+      if (!j) return;
+      const n = parseInt(String(j.count).replace(/\D/g, ''), 10); // \D escapado: va dentro de un template literal
+      if (n >= 0) { document.getElementById('visitas-n').textContent = n.toLocaleString('en'); document.getElementById('visitas').hidden = false; }
     })
     .catch(() => {});
   const panel = document.getElementById('panel');
