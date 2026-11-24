@@ -1,0 +1,54 @@
+name: Actualizar contador de visitas
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: contador-de-visitas
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Consultar GoatCounter y publicar el total
+        shell: bash
+        env:
+          GOATCOUNTER_STATS_TOKEN: ${{ secrets.GOATCOUNTER_STATS_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          : "${GOATCOUNTER_STATS_TOKEN:?Falta el secreto GOATCOUNTER_STATS_TOKEN}"
+          snapshot=$(curl --fail --silent --show-error --max-time 30 \
+            --header "Authorization: Bearer $GOATCOUNTER_STATS_TOKEN" \
+            --header 'Content-Type: application/json' \
+            'https://justhipo.goatcounter.com/api/v0/stats/total?start=2020-01-01T00%3A00%3A00Z' |
+            jq -ec '.total | select(type == "number" and . >= 0 and . == floor) | {count: .}')
+
+          cd "$(mktemp -d)"
+          gh auth setup-git --hostname github.com
+          git init --initial-branch=counter-data
+          git remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          branch=$(git ls-remote --heads origin refs/heads/counter-data)
+          if [[ -n "$branch" ]]; then
+            git fetch --depth=1 origin refs/heads/counter-data
+            git switch --detach FETCH_HEAD
+          fi
+          if cmp -s visits.json <(printf '%s\n' "$snapshot"); then
+            echo "El total de GoatCounter coincide con el publicado."
+            exit 0
+          fi
+
+          printf '%s\n' "$snapshot" > visits.json
+          git add visits.json
+          git commit -m 'Actualiza el total de visitas'
+          git push origin HEAD:refs/heads/counter-data

@@ -668,15 +668,35 @@ section#sobre { margin-top:0; }
   // ---------- Panel de estilo ----------
   const raiz = document.documentElement;
   const PUBLICO = true;
-  // ---------- Contador de visitas (GoatCounter; la respuesta viene con hasta 4 h de caché) ----------
-  if (PUBLICO) fetch('https://justhipo.goatcounter.com/counter/TOTAL.json?start=2020-01-01')
-    .then((r) => (r.ok ? r.json() : null))
-    .then((j) => {
-      if (!j) return;
-      const n = parseInt(String(j.count).replace(/\D/g, ''), 10); // \D escapado: va dentro de un template literal
-      if (n >= 0) { document.getElementById('visitas-n').textContent = n.toLocaleString('en'); document.getElementById('visitas').hidden = false; }
-    })
-    .catch(() => {});
+  // ---------- Contador de visitas ----------
+  if (PUBLICO) {
+    const leerJson = async (url) => {
+      const respuesta = await fetch(url);
+      if (!respuesta.ok) throw new Error('Contador no disponible');
+      return respuesta.json();
+    };
+    const actualizarVisitas = async () => {
+      let n;
+      try {
+        const datos = await leerJson('https://raw.githubusercontent.com/JustHipo/JustHipo.github.io/refs/heads/counter-data/visits.json');
+        n = datos.count;
+        if (!Number.isSafeInteger(n) || n < 0) throw new Error('Total inválido');
+      } catch {
+        try {
+          const datos = await leerJson('https://justhipo.goatcounter.com/counter/TOTAL.json?start=2020-01-01');
+          n = parseInt(String(datos.count).replace(/[^0-9]/g, ''), 10);
+        } catch {
+          return;
+        }
+      }
+      if (Number.isSafeInteger(n) && n >= 0) {
+        document.getElementById('visitas-n').textContent = n.toLocaleString('en');
+        document.getElementById('visitas').hidden = false;
+      }
+    };
+    actualizarVisitas();
+    setInterval(actualizarVisitas, 15 * 60 * 1000);
+  }
   const panel = document.getElementById('panel');
   const abrir = document.getElementById('panel-abrir');
   if (abrir) abrir.addEventListener('click', () => { const a = panel.classList.toggle('abierto'); abrir.setAttribute('aria-expanded', a); });
