@@ -669,7 +669,7 @@ section#sobre { margin-top:0; }
   const raiz = document.documentElement;
   const PUBLICO = true;
   // ---------- Contador de visitas (GoatCounter; la respuesta viene con hasta 4 h de caché) ----------
-  if (PUBLICO) fetch('https://justhipo.goatcounter.com/counter/TOTAL.json')
+  if (PUBLICO) fetch('https://justhipo.goatcounter.com/counter/TOTAL.json?start=2020-01-01')
     .then((r) => (r.ok ? r.json() : null))
     .then((j) => {
       if (!j) return;
